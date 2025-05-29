@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Python Compiler</title>
+</head>
+<body>
+    <h1>Online Python Compiler</h1>
+    <textarea id="code"></textarea>
+    <button onclick="runCode()">Run</button>
+    <pre id="output"></pre>
+
+    <script>
+        function runCode() {
+            fetch('/run', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({code: document.getElementById("code").value})
+            })
+            .then(response => response.json())
+            .then(data => document.getElementById("output").innerText = data.output);
+        }
+    </script>
+</body>
+</html>
